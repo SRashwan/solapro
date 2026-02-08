@@ -17,6 +17,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- Mobile Blocker --- */
+#mobile-blocker {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-dark);
+    z-index: 100000; /* On top of everything */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Trigger for Mobile Devices (Width < 1024px recommended for DAWs) */
+@media (max-width: 1024px) {
+    #mobile-blocker { display: flex; }
+    
+    /* Hide the actual App UI */
+    header, #timeline-wrapper, footer, #notification-area, #loader { 
+        display: none !important; 
+    }
+}
         :root {
             --bg-dark: #09090b;
             --bg-panel: #141416;
@@ -340,6 +363,7 @@
             display: flex; flex-direction: column; gap: 10px; pointer-events: none;
         }
         
+        
         .toast {
             background: rgba(20, 20, 22, 0.95);
             border-left: 4px solid var(--primary); 
@@ -391,6 +415,13 @@
 <body>
 
     <div id="notification-area"></div>
+    <div id="mobile-blocker">
+    <i class="fas fa-desktop fa-3x" style="color: var(--primary); margin-bottom: 20px;"></i>
+    <h2 style="font-family: 'Rajdhani'; color: var(--text-main);">DESKTOP REQUIRED</h2>
+    <p style="color: var(--text-muted); max-width: 300px;">
+        Solaris Pro requires a larger screen and mouse precision for the audio engine. Please open on a desktop.
+    </p>
+</div>
     <div id="loader">
         <i class="fas fa-circle-notch fa-spin fa-2x"></i>
         <span>PROCESSING AUDIO</span>
@@ -1006,4 +1037,5 @@
         ui.addTrack(); 
     </script>
 </body>
+
 </html>
